@@ -4,8 +4,9 @@
     .end_macro
     
 .data
-	buffer:.space 70000 #espaco relativo a 256 x 256
+	buffer:.space 65536 #espaco relativo a 256 x 256
 	filename:.asciiz "out.txt"
+	selectPlayer:.asciiz "Selecione jogador!\n(1) TEAM BODYBUILDER\n(2) TEAM PSICODELIA\n(3) CANCELAR\n"
 	
 .text   
 	main:
@@ -22,7 +23,7 @@
 		li $v0, 14 #codigo para ler do arquivo
 		move $a0, $s0 #arquivo aberto
 		la $a1, buffer #espaco reservado em memoria para o arquivo
-		li $a2, 100000000000 #numero maximo de caracteres
+		li $a2, 65536 #numero maximo de caracteres
 		syscall
 		
 #===========FECHANDO ARQUIVO LIDO========
@@ -30,14 +31,13 @@
 		move $a0, $s0 #passa arquivo aberto
 		syscall
 		
-    		#li $t1, 0
-    		#li $t2, 4
-    		#li $t3, 65536
-	loop:
-    		#lw $t4, buffer($t1)
-		#sw $t4, buffer($t1)
-    		#addu $t1, $t1, $t2
-   		#bne $t1, $t3, loop  
+    		li $v0, 4
+    		la $a0, selectPlayer
+    		syscall
+    		
+    		li $v0, 5
+    		syscall
+    		
 
    	 Exit
 	
