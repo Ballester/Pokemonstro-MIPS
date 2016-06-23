@@ -88,30 +88,6 @@
     		
     		j loop_batalha
     		nop	
-	
-    		
-    		
-		
-
-#============ABRINDO ARQUIVO PARA LEITURA======
-		li $v0, 13 #codigo para abrir arquivo
-		la $a0, filename #.asciiz referente ao novo do arquivo
-		li $a1, 0 # flag, 0=read
-		li $a2, 0 # mode, desconsiderado
-		syscall
-		move $s0, $v0 #arquivo aberto salvo em s0
-		
-#=============LENDO PARA O BUFFER========
-		li $v0, 14 #codigo para ler do arquivo
-		move $a0, $s0 #arquivo aberto
-		la $a1, buffer #espaco reservado em memoria para o arquivo
-		li $a2, 65536 #numero maximo de caracteres
-		syscall
-		
-#===========FECHANDO ARQUIVO LIDO========
-		li $v0, 16 #codigo para fechar arquivo
-		move $a0, $s0 #passa arquivo aberto
-		syscall
 		
 	loop_pokemonA:
     		li $v0, 4
@@ -427,7 +403,29 @@
     		j main
     		nop
     	
-	
+    	leImagem:
+    		#escolhe o nome do arquivo
+    		#beq $a0
+    	
+		#abre um arquivo
+		li   $v0, 13
+
+		li   $a1, 0        # abrindo para leitura
+		li   $a2, 0
+		syscall        
+		move $t6, $v0      # salva o descritor 
+
+		#le do arquivo
+		li   $v0, 14
+		move $a0, $t6     #descritor
+		la   $a1, buffer   # buffer de leitura
+		li   $a2, 65536     # tamanho do buffer
+		syscall
+
+		#fecha o arquivo
+		li   $v0, 16
+		move $a0, $s6      # descritor
+		syscall	
 	
 	exit:
 	 	nop

@@ -29,3 +29,26 @@ Utilize o bitmap simulator do mars nas seguintes configurações:
 * **gosmon_info** -- Vetor de inteiros contendo: Vida, Ataque e Defesa do Pokemonstro Gosmon
 * **polidori_info** -- Vetor de inteiros contendo: Vida, Ataque e Defesa do Pokemonstro Polidori
 * **xumaufuss_info** -- Vetor de inteiros contendo: Vida, Ataque e Defesa do Pokemonstro Xumaufuss
+
+## Métodos
+* **leImagem**: void
+> O parâmetro é enviado através de $a0 decidindo qual arquivo será aberto. O retorno se dá pela troca da imagem no bitmap display.
+> O parâmetro $a1 é utilizado em caso de imagens de habilidade. Se $a1 = 0, a habilidade é do timeA, se não é do timeB.
+* $a0 = 0: Imagem de abertura Bodybuilder x Gosmon
+* $a0 = 1: Imagem de abertura Bodybuilder x Xumaufuss
+* $a0 = 2: Imagem de abertura Polidori x Gosmon
+* $a0 = 3: Imagem de abertura Polidori x Xumaufuss
+* $a0 = 4: Imagem de habilidade 1 Bodybuilder x Gosmon
+* $a0 = 5: Imagem de habilidade 2 Bodybuilder x Gosmon 
+* $a0 = 6: Imagem de habilidade 1 Bodybuilder x Xumaufuss
+* $a0 = 7: Imagem de habilidade 2 Bodybuilder x Xumaufuss
+* $a0 = 8: Imagem de habilidade 1 Polidori x Gosmon
+* $a0 = 9: Imagem de habilidade 2 Polidori x Gosmon
+* $a0 = 10: Imagem de habilidade 1 Polidori x Xumaufuss
+* $a0 = 11: Imagem de habilidade 2 Polidori x Xumaufuss
+---
+* **escolheHabilidadeA**: int
+> Retorna 1 ou 2 dependendo da habilidade escolhida para o time A.
+---
+* **escolheHabilidadeB**: int
+> Retorna 1 ou 2 dependendo da habilidade escolhida para o time B.
