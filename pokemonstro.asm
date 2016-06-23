@@ -18,7 +18,7 @@
 	
 	selectHabilidadeBodybuilder: .asciiz "Selecione a Habilidade do Bodybuilder:\n(1) Trapezera Buscando\n(2) Maluco Doente\n\n"
 	selectHabilidadeGosmon: .asciiz "Selecione a Habilidade do Gosmon:\n(1) Atakotaku\n(2) Sleep\n\n"
-	selectHabilidadePolidori: .asciiz "Selecione a Habilidade do Polidori:\n(1) Chama o Brets e Juliano\n(1) Rir\n\n"
+	selectHabilidadePolidori: .asciiz "Selecione a Habilidade do Polidori:\n(1) Chama o Brets e Juliano\n(2) Rir\n\n"
 	selectHabilidadeXumaufuss: .asciiz "Selecione a Habilidade do Xumaufuss:\n(1) Confusão\n(2) Confusão\n\n"
 	
 	vitoriaTimeA: .asciiz "Time Bodybuilder foi vencedor!\n\n"
@@ -58,8 +58,8 @@
 	xumaufuss_jubrets:.asciiz"skills/polidori/xumaufuss_jubrets_mno.bmp"
 	
 	#polidori- Rir
-	gosmon_rir:.asciiz"skills/polidori/gosmon_jubrets_mno.bmp"
-	xumaufuss_rir:.asciiz"skills/polidori/xumaufuss_jubrets_mno.bmp"
+	gosmon_rir:.asciiz"skills/polidori/gosmon_rir_mno.bmp"
+	xumaufuss_rir:.asciiz"skills/polidori/xumaufuss_rir_mno.bmp"
 	
 	#xumaufuss- Confusao
 	bodybuilder_confusao:.asciiz"skills/xumaufuss/bodybuilder_confusao_mno.bmp"
