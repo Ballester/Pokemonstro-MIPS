@@ -18,7 +18,7 @@
 	
 	selectHabilidadeBodybuilder: .asciiz "Selecione a Habilidade do Bodybuilder:\n(1) Trapezera Buscando\n(2) Maluco Doente\n\n"
 	selectHabilidadeGosmon: .asciiz "Selecione a Habilidade do Gosmon:\n(1) Atakotaku\n(2) Sleep\n\n"
-	selectHabilidadePolidori: .asciiz "Selecione a Habilidade do Polidori:\n(1) Rir\n(2) Chama o Brets e Juliano\n\n"
+	selectHabilidadePolidori: .asciiz "Selecione a Habilidade do Polidori:\n(1) Chama o Brets e Juliano\n(1) Rir\n\n"
 	selectHabilidadeXumaufuss: .asciiz "Selecione a Habilidade do Xumaufuss:\n(1) Confusão\n(2) Confusão\n\n"
 	
 	vitoriaTimeA: .asciiz "Time Bodybuilder foi vencedor!\n\n"
@@ -361,6 +361,7 @@
     			
     	
     	executaHabilidadeA:
+    	    	sw $ra, 0($sp)
     		#se for 1 é bodybuilder, se não for 1 é polidori
     		li $t0, 1
     		beq $s0, $t0, bodybuilder_executa
@@ -368,22 +369,60 @@
     		
     		polidori_executa:
     		
-    			#TODO CARREGAR A IMAGEM
     			beq $a0, $t0, polidori_executa_1
     			nop
     			
     			polidori_executa_2:
     				
-    				#TODO habilidade
+    				#Escolhe a imagem
+    				beq $s1, $t0, poli_im_2_gosmon
+    				nop
+    				
+    				poli_im_2_xumaufuss:
+    					li $a0, 11
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    					j out_poli_2
+    					nop
+    					
+    				poli_im_2_gosmon:
+    					li $a0, 9
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    				
+    				out_poli_2:
     				sub $s7, $s7, 5
     				
+    				#troca endereco de retorno
+    				lw $ra, 0($sp)
     				jr $ra
     				nop
     					
     			polidori_executa_1:
+    				beq $s1, $t0, poli_im_1_gosmon
+    				nop
+    				
+    				poli_im_1_xumaufuss:
+    					li $a0, 10
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    					j out_poli_1
+    					nop
+    					
+    				poli_im_1_gosmon:
+    					li $a0, 8
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    				
+    				out_poli_1:
     			 	sub $t0, $s7, $s3 #ataque menos defesa
     			 	add $s5, $s5, $t0 #diminui do hp
     			 	
+    			 	lw $ra, 0($sp)
     			 	jr $ra
     				nop 
     			
@@ -394,20 +433,62 @@
     			nop
     			
     			bodybuilder_executa_2:
-    			
+    				
+    				beq $s1, $t0, body_im_2_gosmon
+    				nop
+    				
+    				body_im_2_xumaufuss:
+    					li $a0, 7
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    					j out_body_2
+    					nop
+    					
+    				body_im_2_gosmon:
+    					li $a0, 5
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    					
+    				out_body_2:
     				sub $s7, $s7, 3
     			
+    				lw $ra, 0($sp)
     				jr $ra
     				nop
     				
     			bodybuilder_executa_1:
+    			
+    				beq $s1, $t0, body_im_1_gosmon
+    				nop
+    				
+    				body_im_1_xumaufuss:
+    					li $a0, 6
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    					j out_body_1
+    					nop
+    					
+    				body_im_1_gosmon:
+    					li $a0, 4
+    					li $a1, 0
+    					jal leImagem
+    					nop
+    					j out_body_1
+    					nop
+    					
+    				out_body_1:
     				sub $t0, $s7, $s3 #ataque menos defesa
     				add $s5, $s5, $t0 #diminui do hp
     			
+    				lw $ra, 0($sp)
     				jr $ra
     				nop
     		
     	executaHabilidadeB:
+    		sw $ra, 0($sp)
     		#se for 1 é gosmon, se não é xumaufuss
     		li $t0, 1
     		beq $s1, $t0, gosmon_executa
@@ -426,14 +507,52 @@
     			nop
     			
     			not_confuso:
-    			
+    				
+    				beq $s0, $t0, xuma_im_2_body
+    				nop
+    				
+    				xuma_im_2_poli:
+    					li $a0, 11
+    					li $a1, 1
+    					jal leImagem
+    					nop
+    					j out_xuma_2
+    					nop
+    				
+    				xuma_im_2_body:
+    					li $a0, 7
+    					li $a1, 1
+    					jal leImagem
+    					nop
+    					
+    				out_xuma_2:
+    				lw $ra, 0($sp)
     				jr $ra
    				nop
     			
     			confuso:
+    				beq $s0, $t0, xuma_im_1_body
+    				nop
+    				
+    				xuma_im_1_poli:
+    					li $a0, 10
+    					li $a1, 1
+    					jal leImagem
+    					nop
+    					j out_xuma_1
+    					nop
+    				
+    				xuma_im_1_body:
+    					li $a0, 6
+    					li $a1, 1
+    					jal leImagem
+    					nop
+    					
+    				out_xuma_1:
     				#causa dano no oponente sem contar defesa
     				sub $s2, $s2, $s3
     			
+    				lw $ra, 0($sp)
     				jr $ra
     				nop
     			
@@ -444,15 +563,53 @@
     			nop
     			
     			gosmon_executa_2:
+    				beq $s0, $t0, gosmon_im_2_body
+    				nop
+    				
+    				gosmon_im_2_poli:
+    					li $a0, 9
+    					li $a1, 1
+    					jal leImagem
+    					nop
+    					j out_gosmon_2
+    					nop
+    				
+    				gosmon_im_2_body:
+    					li $a0, 5
+    					li $a1, 1
+    					jal leImagem
+    					nop
+
+				out_gosmon_2:    			
     				addi $s5, $s5, 7
     				
+    				lw $ra, 0($sp)
     				jr $ra
     				nop
     			
     			gosmon_executa_1:
+    				beq $s0, $t0, gosmon_im_1_body
+    				nop
+    				
+    				gosmon_im_1_poli:
+    					li $a0, 8
+    					li $a1, 1
+    					jal leImagem
+    					nop
+    					j out_gosmon_1
+    					nop
+    					
+    				gosmon_im_1_body:
+    					li $a0, 4
+    					li $a1, 1
+    					jal leImagem
+    					nop
+    					
+    				out_gosmon_1:
     				sub $t0, $s4, $s6 #ataque menos defesa
     				add $s2, $s2, $t0 #diminui do hp
     				
+    				lw $ra, 0($sp)
     				jr $ra
     				nop
     				
