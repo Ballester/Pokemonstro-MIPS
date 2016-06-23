@@ -673,16 +673,16 @@
     		beq $a0, $t0, PolixXumas
     		nop
     		addi $t0, $t0, 1
-    		beq $a0, $t0, GosmonMaluco
+    		beq $a0, $t0, GosmonTrapezera
     		nop 
     		addi $t0, $t0, 1
-    		beq $a0, $t0, GosmonTrapezera
-    		nop
-    		addi $t0, $t0, 1
-    		beq $a0, $t0, XumasMaluco
+    		beq $a0, $t0, GosmonMaluco
     		nop
     		addi $t0, $t0, 1
     		beq $a0, $t0, XumasTrapezera
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, XumasMaluco
     		nop
     		addi $t0, $t0, 1
     		beq $a0, $t0, GosmonJubrets
@@ -716,16 +716,16 @@
     		beq $a0, $t0, BBsleep
     		nop
     		addi $t0, $t0, 1
-    		beq $a0, $t0, Polianimes
-    		nop
-    		addi $t0, $t0, 1
-    		beq $a0, $t0, Polisleep
-    		nop
-    		addi $t0, $t0, 1
     		beq $a0, $t0, BBconfuso
     		nop
     		addi $t0, $t0, 1
     		beq $a0, $t0, BBnaoconfuso
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, Polianimes
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, Polisleep
     		nop
     		addi $t0, $t0, 1
     		beq $a0, $t0, Policonfuso
@@ -856,7 +856,7 @@
 
 			#fecha o arquivo
 			li   $v0, 16
-			move $a0, $s6      # descritor
+			move $a0, $t6      # descritor
 			syscall	
 			
 			jr $ra
