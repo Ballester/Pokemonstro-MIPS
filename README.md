@@ -19,7 +19,7 @@ Utilize o bitmap simulator do mars nas seguintes configurações:
 * **s6** -- Ataque atual do Pokemonstro B
 * **s7** -- Defesa atual do Pokemonstro B
 
-## Espacos de Memória
+## Espaços de Memória
 * **buffer** -- Espaco reservado para a imagem sendo mostrada
 * **filename** -- Imagem sendo carregada
 * **jogar** -- String que imprime menu
@@ -29,6 +29,9 @@ Utilize o bitmap simulator do mars nas seguintes configurações:
 * **gosmon_info** -- Vetor de inteiros contendo: Vida, Ataque e Defesa do Pokemonstro Gosmon
 * **polidori_info** -- Vetor de inteiros contendo: Vida, Ataque e Defesa do Pokemonstro Polidori
 * **xumaufuss_info** -- Vetor de inteiros contendo: Vida, Ataque e Defesa do Pokemonstro Xumaufuss
+* **printAuxiliarHPA** -- String auxiliar avisando que o time A venceu
+* **printAuxiliarHPB** -- String auxiliar avisando que o time B venceu
+* **printAuxiliarBarraN** -- String auxiliar que printa \n
 
 ## Métodos
 * **leImagem**: void
@@ -52,3 +55,31 @@ Utilize o bitmap simulator do mars nas seguintes configurações:
 ---
 * **escolheHabilidadeB**: int
 > Retorna 1 ou 2 dependendo da habilidade escolhida para o time B.
+---
+* **loop_pokemonA**: void
+> Função auxiliar para escolher o pokemonstro do time A.
+---
+* **loop_pokemonB**: void
+> Função auxiliar para escolher o pokemonstro do time B.
+---
+* **carrega_pokemonA**: void
+> Função auxiliar que carrega os dados do pokemonstro do time A escolhido da memória para os registradores.
+---
+* **carrega_pokemonB**: void
+> Função auxiliar que carrega os dados do pokemonstro do time B escolhido da memória para os registradores.
+---
+* **executaHabilidadeA**: void
+> Função auxiliar que executa a habilidade escolhida préviamente no método 'escolheHabilidadeA'. (Utiliza o valor que está em $a0, por isso deve ser utilizada em seguida da escolha).
+---
+* **executaHabilidadeB**: void
+> Função auxiliar que executa a habilidade escolhida préviamente no método 'escolheHabilidadeB'. (Utiliza o valor que está em $a0, por isso deve ser utilizada em seguida da escolha).
+---
+* **printaEstadoAtual**: void
+> Printa a HP atual dos dois pokemonstros.
+---
+* **vitoriaA**: void
+> Printa uma mensagem de vitória do time A.
+---
+* **vitoriaB**: void
+> Printa uma mensagem de vitória do time B.
+---

@@ -4,7 +4,7 @@
     .end_macro
     
 .data
-	buffer:.space 65536 #espaco relativo a 256 x 256
+	buffer:.space 300000 #espaco relativo a 256 x 256
 	filename:.asciiz "out.txt"
 	
 	jogar: .asciiz "Deseja jogar?\n(1) Jogar\n(2) Sair\n\n"
@@ -17,9 +17,9 @@
 	xumaufuss_info: .word 10, 7, 3
 	
 	selectHabilidadeBodybuilder: .asciiz "Selecione a Habilidade do Bodybuilder:\n(1) Trapezera Buscando\n(2) Maluco Doente\n\n"
-	selectHabilidadeGosmon: .asciiz "Selecione a Habilidade do Gosmon:\n(1) blablabla\n(2) blablabla\n\n"
-	selectHabilidadePolidori: .asciiz "Selecione a Habilidade do Polidori:\n(1) blablabla\n(2) blablabla\n\n"
-	selectHabilidadeXumaufuss: .asciiz "Selecione a Habilidade do Xumaufuss:\n(1) blablabla\n(2) blablabla\n\n"
+	selectHabilidadeGosmon: .asciiz "Selecione a Habilidade do Gosmon:\n(1) Atakotaku\n(2) Sleep\n\n"
+	selectHabilidadePolidori: .asciiz "Selecione a Habilidade do Polidori:\n(1) Rir\n(2) Chama o Brets e Juliano\n\n"
+	selectHabilidadeXumaufuss: .asciiz "Selecione a Habilidade do Xumaufuss:\n(1) Confusão\n(2) Confusão\n\n"
 	
 	vitoriaTimeA: .asciiz "Time Bodybuilder foi vencedor!\n\n"
 	vitoriaTimeB: .asciiz "Time CC foi vencedor!\n\n"
@@ -28,9 +28,52 @@
 	printAuxiliarHPB: .asciiz "\nHP atual do time B: " 
 	printAuxiliarBarraN: .asciiz "\n\n"
 	
+	
+	#======ABERTURAS=======
+	bodybuilder_gosmon:.asciiz "abertura/bodybuilder_gosmon_mn.bmp"
+	bodybuilder_xumaufuss:.asciiz "abertura/bodybuilder_xumaufuss_mn.bmp"
+	polidori_gosmon:.asciiz "abertura/polidori_gosmon_mn.bmp"
+	polidori_xumaufuss:.asciiz "abertura/polidori_xumaufuss_mn.bmp"
+	
+	#=====SKILLS======
+	
+	#bodybuilder- Maluco Doente:
+	gosmon_maluco:.asciiz"skills/bodybuilder/gosmon_maluco_mno.bmp"
+	xumaufuss_maluco:.asciiz"skills/bodybuilder/xumaufuss_maluco_mno.bmp"
+	
+	#bodybuilder- Trapezera buscando
+	gosmon_trapezera:.asciiz"skills/bodybuilder/gosmon_trapezera_mno.bmp"
+	xumaufuss_trapezera:.asciiz"skills/bodybuilder/xumaufuss_trapezera_mno.bmp"
+	
+	#gosmon- Animes
+	bodybuilder_animes:.asciiz"skills/gosmon/bodybuilder_animes_mno.bmp"
+	polidori_animes:.asciiz"skills/gosmon/polidori_animes_mno.bmp"
+	
+	#gosmon- Sleep
+	bodybuilder_sleep:.asciiz"skills/gosmon/bodybuilder_sleep_mno.bmp"
+	polidori_sleep:.asciiz"skills/gosmon/polidori_sleep_mno.bmp"
+	
+	#polidori- JuBrets
+	gosmon_jubrets:.asciiz"skills/polidori/gosmon_jubrets_mno.bmp"
+	xumaufuss_jubrets:.asciiz"skills/polidori/xumaufuss_jubrets_mno.bmp"
+	
+	#polidori- Rir
+	gosmon_rir:.asciiz"skills/polidori/gosmon_jubrets_mno.bmp"
+	xumaufuss_rir:.asciiz"skills/polidori/xumaufuss_jubrets_mno.bmp"
+	
+	#xumaufuss- Confusao
+	bodybuilder_confusao:.asciiz"skills/xumaufuss/bodybuilder_confusao_mno.bmp"
+	polidori_confusao:.asciiz"skills/xumaufuss/polidori_confusao_mno.bmp"
+	
+	#xumaufuss- NaoConfusao
+	bodybuilder_naoconfusao:.asciiz"skills/xumaufuss/bodybuilder_naoconfusao_mno.bmp"
+	polidori_naoconfusao:.asciiz"skills/xumaufuss/polidori_naoconfusao_mno.bmp"
+
+	
+	DEBUGGER: .asciiz "Gosmon?"
+	
 .text   
 	main:
-#============Menu=============#
 		li $v0, 4
     		la $a0, jogar
     		syscall
@@ -61,6 +104,49 @@
     		jal carrega_pokemonB
     		nop
     		
+    		#escolhe imagem de abertura
+    		li $t8, 1
+    		beq $t8, $s0, bodybuilder_abertura
+    		nop
+    		
+    		beq $t8, $s1, polidori_gosmon_abertura
+    		nop
+    		
+    		li $a0, 3
+    		jal leImagem
+    		nop
+    		j loop_batalha
+    		nop
+    		
+    		bodybuilder_abertura:
+    			beq $t8, $s1, bodybuilder_gosmon_abertura
+    			nop
+    			
+    			li $a0, 1
+    			jal leImagem
+    			nop
+    			j loop_batalha
+    			nop
+    			
+    			bodybuilder_gosmon_abertura:
+    				li $a0, 0
+    				jal leImagem
+    				nop
+    				j loop_batalha
+    				nop
+    		
+    		polidori_gosmon_abertura:
+    			li $a0, 2
+    		
+    			jal leImagem
+    			nop
+    			j loop_batalha
+    			nop
+    		
+    		j loop_batalha
+    		nop
+    		
+    		
     	loop_batalha:
     		jal printaEstadoAtual
     		nop
@@ -74,7 +160,7 @@
     		jal printaEstadoAtual
     		nop
     		
-    		blez $s5, vitoriaTimeA #verifica se o pokemonstro foi derrotado
+    		blez $s5, vitoriaA #verifica se o pokemonstro foi derrotado
     		nop
     		
     		jal escolheHabilidadeB #retorno em a0
@@ -83,7 +169,7 @@
     		jal executaHabilidadeB
     		nop
     		
-    		blez $s2, vitoriaTimeB #verifica se o pokemonstro foi derrotado
+    		blez $s2, vitoriaB #verifica se o pokemonstro foi derrotado
     		nop
     		
     		j loop_batalha
@@ -161,9 +247,9 @@
     		la $t1, xumaufuss_info
     		
     		#carrega atributos
-    		lw $s2, 0($t1)
-    		lw $s3, 4($t1)
-    		lw $s4, 8($t1)
+    		lw $s5, 0($t1)
+    		lw $s6, 4($t1)
+    		lw $s7, 8($t1)
     		
     		jr $ra
     		nop
@@ -181,11 +267,12 @@
     			nop
     			
     	escolheHabilidadeA:
+    	    	li $t0, 2
     		#se for 1 é bodybuilder, se não for 1 é polidori
     		beq $s0, 1, bodybuilder_habilidades
     		nop
-    		
-    		li $t0, 2
+  
+
     		polidori_habilidades:
     			li $v0, 4
     			la $a0, selectHabilidadePolidori
@@ -227,11 +314,11 @@
     			nop
     		
     	escolheHabilidadeB:
+    	    	li $t0, 2
     		#se for 1 é gosmon, se não for 1 é xumaufuss
     		beq $s1, 1, gosmon_habilidades
     		nop
     		
-    		li $t0, 2
     		xumaufuss_habilidades:
     			li $v0, 4
     			la $a0, selectHabilidadeXumaufuss
@@ -288,12 +375,13 @@
     			polidori_executa_2:
     				
     				#TODO habilidade
+    				sub $s7, $s7, 5
     				
     				jr $ra
     				nop
     					
     			polidori_executa_1:
-    			 	sub $t0, $s4, $s7 #ataque menos defesa
+    			 	sub $t0, $s7, $s3 #ataque menos defesa
     			 	add $s5, $s5, $t0 #diminui do hp
     			 	
     			 	jr $ra
@@ -307,13 +395,13 @@
     			
     			bodybuilder_executa_2:
     			
-    				#TODO habilidade
+    				sub $s7, $s7, 3
     			
     				jr $ra
     				nop
     				
     			bodybuilder_executa_1:
-    				sub $t0, $s3, $s7 #ataque menos defesa
+    				sub $t0, $s7, $s3 #ataque menos defesa
     				add $s5, $s5, $t0 #diminui do hp
     			
     				jr $ra
@@ -322,26 +410,33 @@
     	executaHabilidadeB:
     		#se for 1 é gosmon, se não é xumaufuss
     		li $t0, 1
-    		beq $s0, $t0, gosmon_executa
+    		beq $s1, $t0, gosmon_executa
     		nop
     		
     		xumaufuss_executa:
     			
-    			beq $a0, $t0, xumaufuss_executa_1
+    			#gera numero aleatorio
+    			li $v0, 42
+    			li $a0, 1 #seed
+    			li $a1, 101 #valor maximo
+    			syscall
+   				
+ 			li $t9, 50 #probabilidade de confusao
+    			bgt $a0, $t9, confuso
     			nop
     			
-    			xumaufuss_executa_2:
-    				#TODO Habilidade
-    				
+    			not_confuso:
+    			
+    				jr $ra
+   				nop
+    			
+    			confuso:
+    				#causa dano no oponente sem contar defesa
+    				sub $s2, $s2, $s3
+    			
     				jr $ra
     				nop
     			
-    			xumaufuss_executa_1:
-    				sub $t0, $s6, $s4 #ataque menos defesa
-    				add $s2, $s2, $t0 #diminui do hp
-    				
-    				jr $ra
-    				nop
     				
     		gosmon_executa:
     			
@@ -349,13 +444,13 @@
     			nop
     			
     			gosmon_executa_2:
-    				#TODO Habilidade
+    				addi $s5, $s5, 7
     				
     				jr $ra
     				nop
     			
     			gosmon_executa_1:
-    				sub $t0, $s6, $s4 #ataque menos defesa
+    				sub $t0, $s4, $s6 #ataque menos defesa
     				add $s2, $s2, $t0 #diminui do hp
     				
     				jr $ra
@@ -404,28 +499,211 @@
     		nop
     	
     	leImagem:
-    		#escolhe o nome do arquivo
-    		#beq $a0
-    	
-		#abre um arquivo
-		li   $v0, 13
+    		move $t0, $zero
+    		
+    		bne $a1, $zero, otherTeam
+    		nop
+      		#escolhe o nome do arquivo
+    		beq $a0, $t0, BBxGosmon
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, BBxXumas
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, PolixGosmon
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, PolixXumas
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, GosmonMaluco
+    		nop 
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, GosmonTrapezera
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, XumasMaluco
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, XumasTrapezera
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, GosmonJubrets
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, GosmonRir
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, XumasJubrets
+    		nop
+    		addi $t0, $t0, 1
+       		beq $a0, $t0, XumasRir
+       		nop
+       		
+       	otherTeam:
+       		beq $a0, $t0, BBxGosmon
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, BBxXumas
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, PolixGosmon
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, PolixXumas
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, BBanimes
+    		nop 
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, BBsleep
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, Polianimes
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, Polisleep
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, BBconfuso
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, BBnaoconfuso
+    		nop
+    		addi $t0, $t0, 1
+    		beq $a0, $t0, Policonfuso
+    		nop
+    		addi $t0, $t0, 1
+       		beq $a0, $t0, Polinaoconfuso
+       		nop
+    		
+    		BBxGosmon:
+    			la $t1, bodybuilder_gosmon
+    			j abre
+    			nop
+    			
+    		BBxXumas:
+    			la $t1, bodybuilder_xumaufuss
+    			j abre
+    			nop
+    		
+    		PolixGosmon:
+    			la $t1, polidori_gosmon
+    			j abre
+    			nop
+    		
+    		PolixXumas:
+    			la $t1, polidori_xumaufuss
+    			j abre
+    			nop
+    			
+    		GosmonMaluco:
+    			la $t1, gosmon_maluco
+    			j abre
+    			nop
+    			
+    		XumasMaluco:
+    			la $t1, xumaufuss_maluco
+    			j abre
+    			nop
+    		
+    		GosmonTrapezera:
+    			la $t1, gosmon_trapezera
+    			j abre
+    			nop
+    			
+    		XumasTrapezera:
+    			la $t1, xumaufuss_trapezera
+    			j abre
+    			nop
+    			
+    		GosmonJubrets:
+    			la $t1, gosmon_jubrets
+    			j abre
+    			nop
+    		
+    		GosmonRir:
+    			la $t1, gosmon_rir
+    			j abre
+    			nop
+    			
+    		XumasJubrets:
+    			la $t1, xumaufuss_jubrets
+    			j abre
+    			nop
+    		
+    		XumasRir:
+    			la $t1, xumaufuss_rir
+    			j abre
+    			nop
+    			
+    		BBanimes:
+    			la $t1, bodybuilder_animes
+    			j abre
+    			nop
+    		
+    		BBsleep:
+    			la $t1, bodybuilder_sleep
+    			j abre
+    			nop
+    			
+    		Polianimes:
+    			la $t1, polidori_animes
+    			j abre
+    			nop
+    			
+    		Polisleep:
+    			la $t1, polidori_sleep
+    			j abre
+    			nop
+    			
+    		BBconfuso:
+    			la $t1, bodybuilder_confusao
+    			j abre
+    			nop
+    			
+    		BBnaoconfuso:
+    			la $t1, bodybuilder_naoconfusao
+    			j abre
+    			nop
+    			
+    		Policonfuso:
+    			la $t1, polidori_confusao
+    			j abre
+    			nop
+    			
+    		Polinaoconfuso:
+    			la $t1, polidori_naoconfusao
+    			j abre
+    			nop
+    				
+    		abre:
+			#abre um arquivo
+			li   $v0, 13
+			move $a0, $t1      #copiado o endereco antes setado por uma das condições
+			li   $a1, 0        # abrindo para leitura
+			li   $a2, 0
+			syscall        
+			move $t6, $v0      # salva o descritor 	
+			tlti $v0, 0		#tratamento de excecao
+			nop
 
-		li   $a1, 0        # abrindo para leitura
-		li   $a2, 0
-		syscall        
-		move $t6, $v0      # salva o descritor 
+			#le do arquivo
+			li   $v0, 14
+			move $a0, $t6     #descritor
+			la   $a1, buffer   # buffer de leitura
+			li   $a2, 300000     # tamanho do buffer
+			syscall
+			tlti $v0, 0	#tratamento de excecao
+			nop
 
-		#le do arquivo
-		li   $v0, 14
-		move $a0, $t6     #descritor
-		la   $a1, buffer   # buffer de leitura
-		li   $a2, 65536     # tamanho do buffer
-		syscall
-
-		#fecha o arquivo
-		li   $v0, 16
-		move $a0, $s6      # descritor
-		syscall	
+			#fecha o arquivo
+			li   $v0, 16
+			move $a0, $s6      # descritor
+			syscall	
+			
+			jr $ra
+			nop
 	
 	exit:
 	 	nop
