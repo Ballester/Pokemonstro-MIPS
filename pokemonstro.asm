@@ -30,44 +30,44 @@
 	
 	
 	#======ABERTURAS=======
-	bodybuilder_gosmon:.asciiz "abertura/bodybuilder_gosmon_mn.bmp"
-	bodybuilder_xumaufuss:.asciiz "abertura/bodybuilder_xumaufuss_mn.bmp"
-	polidori_gosmon:.asciiz "abertura/polidori_gosmon_mn.bmp"
-	polidori_xumaufuss:.asciiz "abertura/polidori_xumaufuss_mn.bmp"
+	bodybuilder_gosmon:.asciiz "abertura/bodybuilder_gosmon_mno.ppm"
+	bodybuilder_xumaufuss:.asciiz "abertura/bodybuilder_xumaufuss_mno.ppm"
+	polidori_gosmon:.asciiz "abertura/polidori_gosmon_mno.ppm"
+	polidori_xumaufuss:.asciiz "abertura/polidori_xumaufuss_mno.ppm"
 	
 	#=====SKILLS======
 	
 	#bodybuilder- Maluco Doente:
-	gosmon_maluco:.asciiz"skills/bodybuilder/gosmon_maluco_mno.bmp"
-	xumaufuss_maluco:.asciiz"skills/bodybuilder/xumaufuss_maluco_mno.bmp"
+	gosmon_maluco:.asciiz"skills/bodybuilder/gosmon_maluco_mnop.ppm"
+	xumaufuss_maluco:.asciiz"skills/bodybuilder/xumaufuss_maluco_mnop.ppm"
 	
 	#bodybuilder- Trapezera buscando
-	gosmon_trapezera:.asciiz"skills/bodybuilder/gosmon_trapezera_mno.bmp"
-	xumaufuss_trapezera:.asciiz"skills/bodybuilder/xumaufuss_trapezera_mno.bmp"
+	gosmon_trapezera:.asciiz"skills/bodybuilder/gosmon_trapezera_mnop.ppm"
+	xumaufuss_trapezera:.asciiz"skills/bodybuilder/xumaufuss_trapezera_mnop.ppm"
 	
 	#gosmon- Animes
-	bodybuilder_animes:.asciiz"skills/gosmon/bodybuilder_animes_mno.bmp"
-	polidori_animes:.asciiz"skills/gosmon/polidori_animes_mno.bmp"
+	bodybuilder_animes:.asciiz"skills/gosmon/bodybuilder_animes_mnop.ppm"
+	polidori_animes:.asciiz"skills/gosmon/polidori_animes_mnop.ppm"
 	
 	#gosmon- Sleep
-	bodybuilder_sleep:.asciiz"skills/gosmon/bodybuilder_sleep_mno.bmp"
-	polidori_sleep:.asciiz"skills/gosmon/polidori_sleep_mno.bmp"
+	bodybuilder_sleep:.asciiz"skills/gosmon/bodybuilder_sleep_mnop.ppm"
+	polidori_sleep:.asciiz"skills/gosmon/polidori_sleep_mnop.ppm"
 	
 	#polidori- JuBrets
-	gosmon_jubrets:.asciiz"skills/polidori/gosmon_jubrets_mno.bmp"
-	xumaufuss_jubrets:.asciiz"skills/polidori/xumaufuss_jubrets_mno.bmp"
+	gosmon_jubrets:.asciiz"skills/polidori/gosmon_jubrets_mnop.ppm"
+	xumaufuss_jubrets:.asciiz"skills/polidori/xumaufuss_jubrets_mnop.ppm"
 	
 	#polidori- Rir
-	gosmon_rir:.asciiz"skills/polidori/gosmon_rir_mno.bmp"
-	xumaufuss_rir:.asciiz"skills/polidori/xumaufuss_rir_mno.bmp"
+	gosmon_rir:.asciiz"skills/polidori/gosmon_rir_mnop.ppm"
+	xumaufuss_rir:.asciiz"skills/polidori/xumaufuss_rir_mnop.ppm"
 	
 	#xumaufuss- Confusao
-	bodybuilder_confusao:.asciiz"skills/xumaufuss/bodybuilder_confusao_mno.bmp"
-	polidori_confusao:.asciiz"skills/xumaufuss/polidori_confusao_mno.bmp"
+	bodybuilder_confusao:.asciiz"skills/xumaufuss/bodybuilder_confusao_mnop.ppm"
+	polidori_confusao:.asciiz"skills/xumaufuss/polidori_confusao_mnop.ppm"
 	
 	#xumaufuss- NaoConfusao
-	bodybuilder_naoconfusao:.asciiz"skills/xumaufuss/bodybuilder_naoconfusao_mno.bmp"
-	polidori_naoconfusao:.asciiz"skills/xumaufuss/polidori_naoconfusao_mno.bmp"
+	bodybuilder_naoconfusao:.asciiz"skills/xumaufuss/bodybuilder_naoconfusao_mnop.ppm"
+	polidori_naoconfusao:.asciiz"skills/xumaufuss/polidori_naoconfusao_mnop.ppm"
 
 	
 	DEBUGGER: .asciiz "Gosmon?"
