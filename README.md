@@ -49,6 +49,7 @@ Utilize o bitmap simulator do mars nas seguintes configurações:
 * $a0 = 9: Imagem de habilidade 2 Polidori x Gosmon
 * $a0 = 10: Imagem de habilidade 1 Polidori x Xumaufuss
 * $a0 = 11: Imagem de habilidade 2 Polidori x Xumaufuss
+
 ---
 * **escolheHabilidadeA**: int
 > Retorna 1 ou 2 dependendo da habilidade escolhida para o time A.
